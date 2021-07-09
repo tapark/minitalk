@@ -1,37 +1,4 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <signal.h>
-
-int ft_atoi(char *s)
-{
-	int num;
-	int i;
-
-	num = 0;
-	i = 0;
-	while (s[i])
-	{
-		num = num * 10;
-		num = num + s[i++] - '0';
-	}
-	return (num);
-}
-
-int ft_itoa(int n)
-{
-	int len;
-	int num;
-
-	len = 0;
-	num = n;
-	while (num / 10 != 0)
-	{
-		len++;
-		num = num / 10;
-	}
-}
+#include "minitalk.h"
 
 char *char_to_binary_string(char c)
 {
@@ -57,17 +24,20 @@ void send_message_to_server(int pid, char *s)
 {
 	int i;
 	int j;
+	int len;
 	char *binary;
 
 	i = 0;
-	while (s[i])
+	len = 0;
+	while (s[len])
+		len++;
+	while (i <= len)
 	{
 		binary = char_to_binary_string(s[i]);
 		j = 0;
-		printf("%s\n", binary);
 		while (binary[j])
 		{
-			usleep(1);
+			usleep(100);
 			if (binary[j] == '0')
 				kill(pid, SIGUSR1);
 			else
@@ -82,18 +52,18 @@ void send_message_to_server(int pid, char *s)
 int main(int argc, char **argv)
 {
 	int server_pid;
-	int client_pid;
-	char *binary;
+	char *client_pid;
 
 	if (argc != 3)
 		return (-1);
 	server_pid = ft_atoi(argv[1]);
 	if (server_pid < 100 && 99998 < server_pid)
 		return (-1);
-	client_pid = getpid()
-	printf("client pid : %d\n", client_pid);
-	send_message_to_server(server_pid, argv[1]);
-//	send_message_to_server(server_pid, argv[2]);
+	client_pid = ft_itoa(getpid());
+	printf("client pid : %s\n", client_pid);
+	send_message_to_server(server_pid, client_pid);
+	send_message_to_server(server_pid, argv[2]);
 
+	free(client_pid);
 	return (0);
 }
