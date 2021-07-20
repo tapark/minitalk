@@ -8,7 +8,7 @@
 #include <signal.h>
 #include <sys/time.h>
 
-int get_current_time(void);
+long long int get_current_time(void);
 int		ft_strlen(char *str);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);

@@ -1,6 +1,6 @@
 #include "minitalk.h"
 
-int get_current_time(void)
+long long int get_current_time(void)
 {
 	struct timeval	time;
 

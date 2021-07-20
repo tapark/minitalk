@@ -58,9 +58,9 @@ int main(int argc, char **argv)
 	client_pid = ft_itoa(getpid());
 	printf("\n[minitalk client]\n");
 	printf("client pid : %s\n\n", client_pid);
+	printf("Send Massage : %lld ms\n", get_current_time());
 	send_message_to_pid(server_pid, client_pid);
 	send_message_to_pid(server_pid, argv[2]);
-	printf("Send Massage : %d ms\n", get_current_time());
 	free(client_pid);
 	return (0);
 }

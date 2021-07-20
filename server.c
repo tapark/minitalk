@@ -35,12 +35,13 @@ void wirte_character(char *binary)
 		if (end_count == 1)
 		{
 			client_pid = ft_atoi(buffer);
+			end_count++;
 			write(1, " > ", 3);
 		}
-		if (end_count == 2)
+		if (end_count == 3)
 		{
 			write(1, "\n", 1);
-			printf("Receive Massage : %d ms\n\n", get_current_time());
+			printf("Receive Massage : %lld ms\n\n", get_current_time());
 			end_count = 0;
 		}
 		i = 0;
