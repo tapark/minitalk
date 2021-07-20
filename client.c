@@ -71,6 +71,7 @@ int main(int argc, char **argv)
 	signal(SIGUSR1, (void *)handler);
 	pause();
 	end = get_current_time();
-	printf("%d Character : %lld ms\n\n", ft_strlen(argv[2]), end - start);
+	printf("%d Characters : %lld ms\n\n", ft_strlen(argv[2]), end - start);
 	free(client_pid);
+	return (0);
 }
