@@ -7,14 +7,7 @@
 #include <stdlib.h>
 #include <signal.h>
 
-typedef struct s_handler
-{
-	char	* binary;
-	int 	index;
-	int 	end_count;
-	int 	is_client_pid;
-}			t_handler;
-
+int get_current_time(void);
 int		ft_strlen(char *str);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);

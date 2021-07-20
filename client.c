@@ -20,18 +20,14 @@ char *char_to_binary_string(char c)
 	return (dest);
 }
 
-void send_message_to_server(int pid, char *s)
+void send_message_to_pid(int pid, char *s)
 {
 	int i;
 	int j;
-	int len;
 	char *binary;
 
 	i = 0;
-	len = 0;
-	while (s[len])
-		len++;
-	while (i <= len)
+	while (i <= ft_strlen(s))
 	{
 		binary = char_to_binary_string(s[i]);
 		j = 0;
@@ -60,10 +56,11 @@ int main(int argc, char **argv)
 	if (server_pid < 100 && 99998 < server_pid)
 		return (-1);
 	client_pid = ft_itoa(getpid());
-	printf("client pid : %s\n", client_pid);
-	send_message_to_server(server_pid, client_pid);
-	send_message_to_server(server_pid, argv[2]);
-
+	printf("\n[minitalk client]\n");
+	printf("client pid : %s\n\n", client_pid);
+	send_message_to_pid(server_pid, client_pid);
+	send_message_to_pid(server_pid, argv[2]);
+	printf("Send Massage : %d ms\n", get_current_time());
 	free(client_pid);
 	return (0);
 }
