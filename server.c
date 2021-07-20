@@ -41,7 +41,7 @@ void wirte_character(char *binary)
 		if (end_count == 3)
 		{
 			write(1, "\n", 1);
-			printf("Receive Massage : %lld ms\n\n", get_current_time());
+			kill(client_pid, SIGUSR1);
 			end_count = 0;
 		}
 		i = 0;

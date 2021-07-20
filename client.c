@@ -45,10 +45,17 @@ void send_message_to_pid(int pid, char *s)
 	}
 }
 
+void handler(int signo)
+{
+	write(1, "[clinet -> server -> client]\n", 29);
+}
+
 int main(int argc, char **argv)
 {
 	int server_pid;
 	char *client_pid;
+	long long int start;
+	long long int end;
 
 	if (argc != 3)
 		return (-1);
@@ -58,9 +65,12 @@ int main(int argc, char **argv)
 	client_pid = ft_itoa(getpid());
 	printf("\n[minitalk client]\n");
 	printf("client pid : %s\n\n", client_pid);
-	printf("Send Massage : %lld ms\n", get_current_time());
+	start = get_current_time();
 	send_message_to_pid(server_pid, client_pid);
 	send_message_to_pid(server_pid, argv[2]);
+	signal(SIGUSR1, (void *)handler);
+	pause();
+	end = get_current_time();
+	printf("%d Character : %lld ms\n\n", ft_strlen(argv[2]), end - start);
 	free(client_pid);
-	return (0);
 }
